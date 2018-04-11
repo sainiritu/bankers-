@@ -1,6 +1,5 @@
 #include <stdio.h>
- 
-int current[5][5], maximum_claim[5][5], available[5];
+int allocated[5][5], maximum_need[5][5], available[5];
 int allocation[5] = {0, 0, 0, 0, 0};
 int maxres[5], running[5], safe = 0;
 int counter = 0, i, j, exec, resources, processes, k = 1;
@@ -30,7 +29,7 @@ int main()
     {
             for(j = 0; j < resources; j++) 
         {
-              scanf("%d", &current[i][j]);
+              scanf("%d", &allocated[i][j]);
             }
         }
  
@@ -39,7 +38,7 @@ int main()
     {
             for(j = 0; j < resources; j++) 
         {
-                    scanf("%d", &maximum_claim[i][j]);
+                    scanf("%d", &maximum_need[i][j]);
             }
         }
  
@@ -54,7 +53,7 @@ int main()
     {
             for (j = 0; j < resources; j++) 
         {
-                    printf("\t%d", current[i][j]);
+                    printf("\t%d", allocated[i][j]);
             }
         printf("\n");
         }
@@ -64,7 +63,7 @@ int main()
     {
             for (j = 0; j < resources; j++) 
         {
-                printf("\t%d", maximum_claim[i][j]);
+                printf("\t%d", maximum_need[i][j]);
             }
             printf("\n");
         }
@@ -73,7 +72,7 @@ int main()
     {
             for (j = 0; j < resources; j++) 
         {
-                    allocation[j] += current[i][j];
+                    allocation[j] += allocated[i][j];
             }
         }
  
@@ -105,7 +104,7 @@ int main()
                         exec = 1;
                         for (j = 0; j < resources; j++) 
                 {
-                                if (maximum_claim[i][j] - current[i][j] > available[j]) 
+                                if (maximum_need[i][j] - allocated[i][j] > available[j]) 
                     {
                                     exec = 0;
                                     break;
@@ -120,7 +119,7 @@ int main()
  
                                 for (j = 0; j < resources; j++) 
                     {
-                                    available[j] += current[i][j];
+                                    available[j] += allocated[i][j];
                                 }
                             break;
                         }
